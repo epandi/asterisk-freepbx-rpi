@@ -36,11 +36,11 @@ RUN mkdir -p /usr/src/spandsp && \
 	make && \
 	make install 
 
-### Build Asterisk 16.4.0
+### Build Asterisk 15.7.2
 RUN cd /usr/src \
-	&& wget http://downloads.asterisk.org/pub/telephony/asterisk/asterisk-16.4.0.tar.gz \
-	&& tar xfz asterisk-16.4.0.tar.gz \
-	&& rm -f asterisk-16.4.0.tar.gz \
+	&& wget http://downloads.asterisk.org/pub/telephony/asterisk/asterisk-15.7.2.tar.gz \
+	&& tar xfz asterisk-15.7.2.tar.gz \
+	&& rm -f asterisk-15.7.2.tar.gz \
 	&& cd asterisk-* \
 	&& contrib/scripts/get_mp3_source.sh \
 	&& ./configure --with-resample --with-pjproject-bundled --with-jansson-bundled --with-ssl=ssl --with-srtp \
@@ -110,7 +110,7 @@ RUN	git clone https://github.com/BelledonneCommunications/bcg729 /usr/src/bcg729
 	curl https://bitbucket.org/arkadi/asterisk-g72x/get/default.tar.gz | tar xvfz - --strip 1 -C /usr/src/asterisk-g72x ; \
 	cd /usr/src/asterisk-g72x ; \
 	./autogen.sh ; \
-	./configure CFLAGS='-march=armv7' --with-bcg729 --with-asterisk160 --enable-penryn; \
+	./configure CFLAGS='-march=armv7' --with-bcg729 --with-asterisk150 --enable-penryn; \
 	make ; \
 	make install
 
