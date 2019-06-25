@@ -27,3 +27,4 @@ With this container you can create a telephony system in your office or house wi
 * https://github.com/flaviostutz/freepbx
 * https://github.com/tiredofit/docker-freepbx
 * https://tecadmin.net/install-php-debian-9-stretch/
+* https://www.raspberrypi.org/forums/viewtopic.php?p=1229991&sid=103f6ac150a6194bbd990647ddd50a6f#p1229991
