@@ -46,7 +46,7 @@ RUN cd /usr/src \
 	&& ./configure --with-resample --with-pjproject-bundled --with-jansson-bundled --with-ssl=ssl --with-srtp \
 	&& make menuselect/menuselect menuselect-tree menuselect.makeopts \
 	&& menuselect/menuselect --disable BUILD_NATIVE --enable app_confbridge --enable app_fax \
-                             --enable app_macro --enable codec_opus --enable codec_silk --enable format_mp3 \
+                             --enable app_macro --enable format_mp3 \
                              --enable BETTER_BACKTRACES --disable MOH-OPSOUND-WAV --enable MOH-OPSOUND-GSM \
 	&& make \
 	&& make install \
