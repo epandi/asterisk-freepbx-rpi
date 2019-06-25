@@ -97,7 +97,7 @@ RUN cd /usr/src \
 
 RUN a2enmod rewrite
 
-### Add G729 Codecs 1.0.4 for Asterisk 16
+### Add G729 Codecs 1.0.4 for Asterisk 15
 RUN	git clone https://github.com/BelledonneCommunications/bcg729 /usr/src/bcg729 ; \
 	cd /usr/src/bcg729 ; \
 	git checkout tags/1.0.4 ; \
