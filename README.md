@@ -12,7 +12,7 @@ With this container you can create a telephony system in your office or house wi
  * Asterisk 16.4.0
  * Freepbx-14.0-latest
  * Opensource G729 v1.0.4
- * Modules: IVR, Time Conditions, Backup, Recording
+ * Modules: IVR, Time Conditions, Backup, Recording, callrecordings, conferences, dashboard, featurecodeadmin, infoservices, logfiles, msuic, sipsettings, voicemail, certman, userman, pm2, ucp
  * Automatic backup script
  * Container size: approx 
 
