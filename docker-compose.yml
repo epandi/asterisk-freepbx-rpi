@@ -1,0 +1,21 @@
+version: "3.7"
+services:
+  freepbx:
+#    build: .
+    image: epandi/freepbx:armhf
+    ports:
+      - 8001:80
+      - 5060:5060
+      - 5060:5060/udp
+      - 5160:5160
+      - 5160:5160/udp
+      - 10000-10100:10000-10100/udp
+    volumes:
+      - /etc/localtime:/etc/localtime:ro 
+      - /etc/timezone:/etc/timezone:ro 
+#      - freepbx-backup:/backup
+#      - freepbx-recordings:/var/spool/asterisk/monitor
+    environment: 
+      - TZ=Europe/Amsterdam
+    network_mode: "bridge"
+    restart: unless-stopped
