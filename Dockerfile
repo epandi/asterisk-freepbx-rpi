@@ -89,6 +89,9 @@ RUN cd /usr/src \
 	&& fwconsole chown \
 	&& fwconsole ma upgradeall \
 	&& fwconsole ma downloadinstall announcement backup bulkhandler ringgroups timeconditions ivr restapi cel \
+	&& fwconsole ma downloadinstall soundlang recordings voicemail sipsettings infoservices featurecodeadmin logfiles conferences callrecording dashboard music \
+	&& fwconsole ma downloadinstall certman userman pm2 \
+	&& fwconsole ma downloadinstall ucp \
 	&& /etc/init.d/mysql stop \
 	&& rm -rf /usr/src/freepbx*
 
