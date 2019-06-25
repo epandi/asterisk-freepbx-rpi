@@ -91,6 +91,10 @@ RUN cd /usr/src \
 	&& fwconsole ma downloadinstall announcement backup bulkhandler ringgroups timeconditions ivr restapi cel \
 	&& fwconsole ma downloadinstall soundlang recordings voicemail sipsettings infoservices featurecodeadmin logfiles conferences callrecording dashboard music \
 	&& fwconsole ma downloadinstall certman userman pm2 \
+# ucp fix https://community.freepbx.org/t/ucp-upgrade-error/58273
+	&& touch /usr/bin/icu-config \
+	&& echo "icuinfo 2>/dev/null|grep \"version\"|sed 's/.*>\(.*\)<.*/\1/g'" > /usr/bin/icu-config \
+	&& chmod +x /usr/bin/icu-config  \
 	&& fwconsole ma downloadinstall ucp \
 	&& /etc/init.d/mysql stop \
 	&& rm -rf /usr/src/freepbx*
