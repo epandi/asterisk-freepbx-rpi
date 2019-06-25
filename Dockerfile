@@ -1,4 +1,4 @@
-FROM arm32v7/node:12-stretch-slim
+FROM arm32v7/node:12-stretch
 
 ENV DEBIAN_FRONTEND noninteractive
 
