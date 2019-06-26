@@ -88,13 +88,13 @@ RUN cd /usr/src \
 	&& ./install -n \
 	&& fwconsole chown \
 	&& fwconsole ma upgradeall \
-	&& fwconsole ma downloadinstall announcement backup bulkhandler ringgroups timeconditions ivr restapi cel \
+	&& fwconsole ma downloadinstall announcement backup bulkhandler ringgroups ivr cel calendar timeconditions \
 	&& fwconsole ma downloadinstall soundlang recordings voicemail sipsettings infoservices featurecodeadmin logfiles conferences callrecording dashboard music \
-	&& fwconsole ma downloadinstall certman userman pm2 \
-# ucp fix https://community.freepbx.org/t/ucp-upgrade-error/58273
+	&& fwconsole ma downloadinstall certman userman restapi pm2 \
+# ucp-fix : https://community.freepbx.org/t/ucp-upgrade-error/58273/3
 	&& touch /usr/bin/icu-config \
-	&& echo "icuinfo 2>/dev/null|grep \"version\"|sed 's/.*>\(.*\)<.*/\1/g'" > /usr/bin/icu-config \
-	&& chmod +x /usr/bin/icu-config  \
+	&& echo "icuinfo 2>/dev/null|grep '\"version\"'|sed 's/.*\">\(.*\)<.*/\\\1/g'" > /usr/bin/icu-config \
+	&& chmod +x /usr/bin/icu-config \
 	&& fwconsole ma downloadinstall ucp \
 	&& /etc/init.d/mysql stop \
 	&& rm -rf /usr/src/freepbx*
@@ -119,19 +119,6 @@ RUN	git clone https://github.com/BelledonneCommunications/bcg729 /usr/src/bcg729
 	make install
 
 RUN sed -i 's/^user		= mysql/user		= root/' /etc/mysql/my.cnf
-
-### Cleanup 
-RUN mkdir -p /var/run/fail2ban && \
-             cd / && \
-             rm -rf /usr/src/* /tmp/* /etc/cron* && \
-             apt-get purge -y autoconf automake bison build-essential doxygen flex libasound2-dev libcurl4-openssl-dev \
-             libedit-dev libical-dev libiksemel-dev libjansson-dev libmariadbclient-dev libncurses5-dev libneon27-dev \
-             libnewt-dev libogg-dev libresample1-dev libspandsp-dev libsqlite3-dev libsrtp0-dev libssl-dev libtiff-dev \
-             libtool-bin libvorbis-dev libxml2-dev pkg-config python-dev subversion unixodbc-dev uuid-dev libspandsp-dev && \
-             apt-get -y autoremove && \
-             apt-get clean && \
-             apt-get install -y make && \
-             rm -rf /var/lib/apt/lists/*
 
 COPY ./run /run
 RUN chmod +x /run/*
