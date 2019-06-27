@@ -36,11 +36,11 @@ RUN mkdir -p /usr/src/spandsp && \
 	make && \
 	make install 
 
-### Build Asterisk 15.7.2
+### Build Asterisk 16-current
 RUN cd /usr/src \
-	&& wget http://downloads.asterisk.org/pub/telephony/asterisk/asterisk-15.7.2.tar.gz \
-	&& tar xfz asterisk-15.7.2.tar.gz \
-	&& rm -f asterisk-15.7.2.tar.gz \
+	&& wget http://downloads.asterisk.org/pub/telephony/asterisk/asterisk-16-current.tar.gz \
+	&& tar xfz asterisk-16-current.tar.gz \
+	&& rm -f asterisk-16-current.tar.gz \
 	&& cd asterisk-* \
 	&& contrib/scripts/get_mp3_source.sh \
 	&& ./configure --with-resample --with-pjproject-bundled --with-jansson-bundled --with-ssl=ssl --with-srtp \
@@ -76,11 +76,11 @@ RUN sed -i 's/^upload_max_filesize = 2M/upload_max_filesize = 120M/' /etc/php/5.
 COPY ./config/odbcinst.ini /etc/odbcinst.ini
 COPY ./config/odbc.ini /etc/odbc.ini
 
-### Install FreePBX 14.0 latest
+### Install FreePBX 15.0 latest
 RUN cd /usr/src \
-	&& wget http://mirror.freepbx.org/modules/packages/freepbx/freepbx-14.0-latest.tgz \
-	&& tar xfz freepbx-14.0-latest.tgz \
-	&& rm -f freepbx-14.0-latest.tgz \
+	&& wget http://mirror.freepbx.org/modules/packages/freepbx/freepbx-15.0-latest.tgz \
+	&& tar xfz freepbx-15.0-latest.tgz \
+	&& rm -f freepbx-15.0-latest.tgz \
 	&& cd freepbx \
 	&& chown mysql:mysql -R /var/lib/mysql/* \
 	&& /etc/init.d/mysql start \
@@ -101,7 +101,7 @@ RUN cd /usr/src \
 
 RUN a2enmod rewrite
 
-### Add G729 Codecs 1.0.4 for Asterisk 15
+### Add G729 Codecs 1.0.4 for Asterisk 16
 RUN	git clone https://github.com/BelledonneCommunications/bcg729 /usr/src/bcg729 ; \
 	cd /usr/src/bcg729 ; \
 	git checkout tags/1.0.4 ; \
@@ -114,7 +114,7 @@ RUN	git clone https://github.com/BelledonneCommunications/bcg729 /usr/src/bcg729
 	curl https://bitbucket.org/arkadi/asterisk-g72x/get/default.tar.gz | tar xvfz - --strip 1 -C /usr/src/asterisk-g72x ; \
 	cd /usr/src/asterisk-g72x ; \
 	./autogen.sh ; \
-	./configure CFLAGS='-march=armv7' --with-bcg729 --with-asterisk150 --enable-penryn; \
+	./configure CFLAGS='-march=armv7' --with-bcg729 --with-asterisk160 --enable-penryn; \
 	make ; \
 	make install
 
