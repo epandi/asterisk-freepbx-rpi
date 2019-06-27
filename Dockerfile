@@ -76,11 +76,11 @@ RUN sed -i 's/^upload_max_filesize = 2M/upload_max_filesize = 120M/' /etc/php/5.
 COPY ./config/odbcinst.ini /etc/odbcinst.ini
 COPY ./config/odbc.ini /etc/odbc.ini
 
-### Install FreePBX 15.0 latest
+### Install FreePBX 14.0 latest
 RUN cd /usr/src \
-	&& wget http://mirror.freepbx.org/modules/packages/freepbx/freepbx-15.0-latest.tgz \
-	&& tar xfz freepbx-15.0-latest.tgz \
-	&& rm -f freepbx-15.0-latest.tgz \
+	&& wget http://mirror.freepbx.org/modules/packages/freepbx/freepbx-14.0-latest.tgz \
+	&& tar xfz freepbx-14.0-latest.tgz \
+	&& rm -f freepbx-14.0-latest.tgz \
 	&& cd freepbx \
 	&& chown mysql:mysql -R /var/lib/mysql/* \
 	&& /etc/init.d/mysql start \
