@@ -94,7 +94,7 @@ RUN cd /usr/src && mkdir freepbx \
 	&& ./install -n \
 	&& fwconsole chown \
 	&& fwconsole ma downloadinstall framework core \
-	&& fwconsole ma download cdr customappsreg \
+	&& fwconsole ma downloadinstall cdr customappsreg \
 	&& fwconsole ma upgradeall \
 	&& fwconsole ma downloadinstall soundlang recordings announcement filestore backup bulkhandler callrecording ringgroups ivr cel calendar timeconditions \
 	&& fwconsole ma downloadinstall voicemail sipsettings infoservices featurecodeadmin logfiles conferences dashboard music \
