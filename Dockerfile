@@ -43,6 +43,7 @@ RUN cd /usr/src \
 	&& rm -f asterisk-16-current.tar.gz \
 	&& cd asterisk-* \
 	&& contrib/scripts/get_mp3_source.sh \
+	&& ./contrib/scripts/install_prereq install \
 	&& ./configure --with-resample --with-pjproject-bundled --with-jansson-bundled --with-ssl=ssl --with-srtp \
 	&& make menuselect/menuselect menuselect-tree menuselect.makeopts \
 	&& menuselect/menuselect --disable BUILD_NATIVE --enable app_confbridge --enable app_fax \
@@ -50,6 +51,7 @@ RUN cd /usr/src \
                              --enable BETTER_BACKTRACES --disable MOH-OPSOUND-WAV --enable MOH-OPSOUND-GSM \
 	&& make \
 	&& make install \
+	&& make samples \
 	&& make config \
 	&& ldconfig \
 	&& update-rc.d -f asterisk remove \
@@ -57,6 +59,7 @@ RUN cd /usr/src \
 
 ### Add users
 RUN useradd -m asterisk \
+#	&& sed 's/#AST_/AST_/g' /etc/default/asterisk  \
 	&& chown asterisk. /var/run/asterisk \
 	&& chown -R asterisk. /etc/asterisk \
 	&& chown -R asterisk. /var/lib/asterisk \
@@ -76,17 +79,22 @@ RUN sed -i 's/^upload_max_filesize = 2M/upload_max_filesize = 120M/' /etc/php/5.
 COPY ./config/odbcinst.ini /etc/odbcinst.ini
 COPY ./config/odbc.ini /etc/odbc.ini
 
-### Install FreePBX 14.0 latest
-RUN cd /usr/src \
-	&& wget http://mirror.freepbx.org/modules/packages/freepbx/freepbx-14.0-latest.tgz \
-	&& tar xfz freepbx-14.0-latest.tgz \
-	&& rm -f freepbx-14.0-latest.tgz \
+### Install FreePBX 15.0 latest
+RUN cd /usr/src && mkdir freepbx \
+	&& curl -ssL https://github.com/FreePBX/framework/archive/release/15.0.15.3.tar.gz | tar xfz - --strip 1 -C /usr/src/freepbx \
+	&& sudo -u asterisk gpg --refresh-keys --keyserver hkp://keyserver.ubuntu.com:80 \
+	&& sudo -u asterisk gpg --import /usr/src/freepbx/amp_conf/htdocs/admin/libraries/BMO/9F9169F4B33B4659.key \
+	&& sudo -u asterisk gpg --import /usr/src/freepbx/amp_conf/htdocs/admin/libraries/BMO/3DDB2122FE6D84F7.key \
+	&& sudo -u asterisk gpg --import /usr/src/freepbx/amp_conf/htdocs/admin/libraries/BMO/86CE877469D2EAD9.key \
+	&& rm -f 15.0.15.3.tar.gz \
 	&& cd freepbx \
 	&& chown mysql:mysql -R /var/lib/mysql/* \
 	&& /etc/init.d/mysql start \
 	&& ./start_asterisk start \
 	&& ./install -n \
 	&& fwconsole chown \
+	&& fwconsole ma downloadinstall framework core \
+	&& fwconsole ma download cdr customappsreg \
 	&& fwconsole ma upgradeall \
 	&& fwconsole ma downloadinstall announcement backup bulkhandler ringgroups ivr cel calendar timeconditions \
 	&& fwconsole ma downloadinstall soundlang recordings voicemail sipsettings infoservices featurecodeadmin logfiles conferences callrecording dashboard music \
