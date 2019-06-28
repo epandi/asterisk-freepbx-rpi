@@ -79,7 +79,7 @@ RUN sed -i 's/^upload_max_filesize = 2M/upload_max_filesize = 120M/' /etc/php/5.
 COPY ./config/odbcinst.ini /etc/odbcinst.ini
 COPY ./config/odbc.ini /etc/odbc.ini
 
-### Install FreePBX 15.0 latest
+### Install FreePBX 15.0.15.3
 RUN cd /usr/src && mkdir freepbx \
 	&& curl -ssL https://github.com/FreePBX/framework/archive/release/15.0.15.3.tar.gz | tar xfz - --strip 1 -C /usr/src/freepbx \
 	&& sudo -u asterisk gpg --refresh-keys --keyserver hkp://keyserver.ubuntu.com:80 \
