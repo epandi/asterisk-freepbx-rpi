@@ -50,6 +50,7 @@ RUN cd /usr/src \
                              --enable BETTER_BACKTRACES --disable MOH-OPSOUND-WAV --enable MOH-OPSOUND-GSM \
 	&& make \
 	&& make install \
+	&& make samples \
 	&& make config \
 	&& ldconfig \
 	&& update-rc.d -f asterisk remove \
