@@ -2,7 +2,7 @@ version: "3.7"
 services:
   freepbx:
     build: .
-#    image: epandi/freepbx:armhf
+#    image: epandi/asterisk-freepbx-rpi:16
     ports:
       - 8001:80
       - 5060:5060
