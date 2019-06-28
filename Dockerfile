@@ -43,7 +43,6 @@ RUN cd /usr/src \
 	&& rm -f asterisk-16-current.tar.gz \
 	&& cd asterisk-* \
 	&& contrib/scripts/get_mp3_source.sh \
-	&& ./contrib/scripts/install_prereq install \
 	&& ./configure --with-resample --with-pjproject-bundled --with-jansson-bundled --with-ssl=ssl --with-srtp \
 	&& make menuselect/menuselect menuselect-tree menuselect.makeopts \
 	&& menuselect/menuselect --disable BUILD_NATIVE --enable app_confbridge --enable app_fax \
@@ -59,7 +58,6 @@ RUN cd /usr/src \
 
 ### Add users
 RUN useradd -m asterisk \
-#	&& sed 's/#AST_/AST_/g' /etc/default/asterisk  \
 	&& chown asterisk. /var/run/asterisk \
 	&& chown -R asterisk. /etc/asterisk \
 	&& chown -R asterisk. /var/lib/asterisk \
