@@ -98,7 +98,7 @@ RUN cd /usr/src && mkdir freepbx \
 	&& fwconsole ma upgradeall \
 	&& fwconsole ma downloadinstall soundlang recordings announcement filestore backup bulkhandler callrecording ringgroups ivr cel calendar timeconditions \
 	&& fwconsole ma downloadinstall voicemail sipsettings infoservices featurecodeadmin logfiles conferences dashboard music \
-	&& fwconsole ma downloadinstall certman userman pm2 \
+	&& fwconsole ma downloadinstall certman userman api pm2 \
 # ucp-fix : https://community.freepbx.org/t/ucp-upgrade-error/58273/4
 	&& touch /usr/bin/icu-config \
 	&& echo "icuinfo 2>/dev/null|grep '\"version\"'|sed 's/.*\">\(.*\)<.*/\\\1/g'" > /usr/bin/icu-config \
