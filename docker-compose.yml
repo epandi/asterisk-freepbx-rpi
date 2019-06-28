@@ -4,7 +4,7 @@ services:
     build: .
 #    image: epandi/asterisk-freepbx-rpi:16
     ports:
-      - 8001:80
+      - 80:80
       - 5060:5060
       - 5060:5060/udp
       - 5160:5160
