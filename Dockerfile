@@ -3,8 +3,7 @@ FROM arm32v7/node:12-stretch
 ENV DEBIAN_FRONTEND noninteractive
 
 ### copy config files
-COPY ./config/odbcinst.ini /tmp/odbcinst.ini
-COPY ./config/odbc.ini /tmp/odbc.ini
+COPY ./config /tmp
 
 ### prepare for php 5.6
 RUN apt-get update  && apt-get install -y ca-certificates apt-transport-https && \
