@@ -6,12 +6,14 @@ ENV DEBIAN_FRONTEND noninteractive
 COPY ./config /tmp
 
 ### prepare for php 5.6
-RUN apt-get update  && apt-get install -y ca-certificates apt-transport-https && \
+RUN apt-get update && \
+	apt-get install -y ca-certificates apt-transport-https && \
 	wget -q https://packages.sury.org/php/apt.gpg -O- | apt-key add - && \
 	echo "deb https://packages.sury.org/php/ stretch main" | tee /etc/apt/sources.list.d/php.list && \
 \
 ### Install runtime depencies
-	apt-get update  && apt-get install --no-install-recommends -y \
+	apt-get update && \
+	apt-get install --no-install-recommends -y \
 		autoconf automake bison build-essential doxygen flex libasound2-dev libcurl4-openssl-dev \
 		libedit-dev libical-dev libiksemel-dev libjansson-dev libmariadbclient-dev libncurses5-dev libneon27-dev \
 		libnewt-dev libogg-dev libresample1-dev libspandsp-dev libsqlite3-dev libsrtp0-dev libssl-dev libtiff-dev \
@@ -133,7 +135,8 @@ cd /usr/src && mkdir freepbx && \
 	mkdir -p /var/run/fail2ban && \
 	cd / && \
 	rm -rf /usr/src/* /tmp/* /etc/cron* && \
-	apt-get purge -y autoconf automake bison build-essential doxygen flex libasound2-dev libcurl4-openssl-dev \
+	apt-get purge -y \
+		autoconf automake bison build-essential doxygen flex libasound2-dev libcurl4-openssl-dev \
 		libedit-dev libical-dev libiksemel-dev libjansson-dev libmariadbclient-dev libncurses5-dev libneon27-dev \
 		libnewt-dev libogg-dev libresample1-dev libspandsp-dev libsqlite3-dev libsrtp0-dev libssl-dev libtiff-dev \
 		libtool-bin libvorbis-dev libxml2-dev pkg-config python-dev subversion unixodbc-dev uuid-dev libspandsp-dev && \
